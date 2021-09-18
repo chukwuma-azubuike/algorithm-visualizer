@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import Arrays from "./Arrays";
+import ArraysBars from "./ArrayBar";
 import { unSortedArray } from "../data";
+import delay from "../utils/delay";
 
 export default function SelectionSort() {
 
@@ -18,7 +19,7 @@ export default function SelectionSort() {
 
         for (let i = 0; i < arr.length - 1; i++) {
 
-            let currentMin = await delay(i);
+            let currentMin = await delay(i, time);
             setHighlightElement(i)
             setArrayBars(arr)
 
@@ -38,14 +39,6 @@ export default function SelectionSort() {
             setArrayBars(arr)
         }
 
-        function delay(i) {
-            var promise = new Promise((resolve, reject) => {
-                window.setTimeout(() => {
-                    resolve(i)
-                }, time);
-            })
-            return promise;
-        }
         sessionStorage.setItem('sorted', true)
         setBg('blue')
         setArrayBars(arr)
@@ -74,16 +67,9 @@ export default function SelectionSort() {
     }
 
     return (
-        <div
-            style={{
-                margin: 'auto',
-                display: 'flex',
-                transform: 'scale(-1)',
-                transform: 'scaleY(-1)',
-                justifyContent: 'center'
-            }} >
+        <div className='sort-container'>
             {arrayBars.map((item, index) =>
-                <Arrays
+                <ArraysBars
                     currentMin={sessionStorage.getItem('currentMin')}
                     color={bg || bgColor(index)}
                     element={item}

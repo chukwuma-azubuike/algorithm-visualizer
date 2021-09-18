@@ -1,7 +1,5 @@
 export default function Arrays(props) {
 
-    console.log('currentMin', props.currentMin)
-
     return (
         <div
             key={props.id}
